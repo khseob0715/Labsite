@@ -1,0 +1,64 @@
+/*
+  Carousel의 fade 효과가 흰 화면을 거치지 않고 부드럽게 교차되도록(cross-fade) 수정합니다.
+*/
+.carousel-fade .carousel-item {
+  display: block;
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.carousel-fade .carousel-item.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.carousel-fade .carousel-inner {
+    height: 100%;
+}
+
+.carousel-fade {
+    height: 550px;
+    background-color: #333; /* 이미지가 로드되기 전 배경색 */
+}
+.hero-image-container {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지가 컨테이너를 꽉 채우도록 설정 */
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2)); /* 텍스트 가독성을 위한 그라데이션 오버레이 */
+}
+
+.hero-caption {
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10%;
+    right: auto;
+    width: 50%;
+    text-align: left !important;
+}
+
+@media (max-width: 768px) {
+    .carousel-fade { height: 400px; }
+    .hero-caption { width: 80%; left: 5%; }
+    .hero-caption h1 { font-size: 2.5rem; }
+}

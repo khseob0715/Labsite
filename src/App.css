@@ -1,0 +1,22 @@
+/*
+  전체 페이지의 배경색을 흰색으로 강제하여
+  테마 등에서 설정된 다른 배경색을 덮어씁니다.
+*/
+body {
+  background-color: #ffffff !important;
+}
+
+/* 카드 hover 시 그림자 및 리프트 효과 */
+.lift {
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out, outline-color 0.2s ease-in-out;
+  outline: 2px solid rgba(255, 81, 119, 0);
+  position: relative;
+  z-index: 1;
+}
+
+.lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; /* 회색 계열 그림자 */
+  outline-color: #ff5177; /* 연한 크림슨 테두리 */
+  z-index: 2;
+}

@@ -1,0 +1,51 @@
+.timeline-container {
+  position: relative;
+  padding-left: 40px; /* Space for the line and dot */
+}
+
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 15px; /* Position of the vertical line */
+  width: 2px;
+  background-color: #e0e0e0; /* Light gray line */
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -34px; /* Adjusted to center on the 2px line at 15px from container edge */
+  top: 1.5rem; /* Adjust vertically to align with card */
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #8b0029; /* Crimson dot */
+  border: 3px solid #fff; /* White border around dot */
+  z-index: 2; /* Ensure dot is above the line */
+}
+
+.timeline-card {
+  margin-left: 30px; /* Push card content away from the dot and line */
+}
+
+/* Adjust for smaller screens */
+@media (max-width: 767.98px) {
+  .timeline-container {
+    padding-left: 20px; /* Less padding on mobile */
+  }
+  .timeline-container::before {
+    left: 10px; /* Adjust line position */
+  }
+  .timeline-dot {
+    left: -19px; /* Adjusted for mobile to center on the 2px line at 10px from container edge */
+  }
+  .timeline-card {
+    margin-left: 10px; /* Less margin for card */
+  }
+}
