@@ -9,7 +9,7 @@ const researchAreasData = [
     icon: "layers",
     title: "Immersive Media",
     description: "Investigating and evaluating user immersion, presence, and overall experience in augmented and virtual reality applications.",
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1200&auto=format&fit=crop",
+    image: process.env.PUBLIC_URL + '/assets/img/research/immedia.png',
     details: "A great immersive experience requires balancing realism, comfort, and usability. We develop tools and interaction paradigms that allow users to intuitively manipulate 3D content. Our projects include auto-generating storyboards with virtual actors and handling diminished reality techniques to seamlessly blend physical environments with virtual elements.",
     techStacks: ['Spatial Computing', 'Mixed Reality', 'Computer Vision', 'Generative AI'],
     highlightPapers: [
@@ -22,7 +22,7 @@ const researchAreasData = [
     icon: "zap",
     title: "Comfortable XR",
     description: "Developing novel techniques and evaluating their effectiveness to reduce cybersickness in various virtual reality environments.",
-    image: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?q=80&w=1200&auto=format&fit=crop",
+    image: process.env.PUBLIC_URL + '/assets/img/research/comfortableXR.png',
     details: "Our research deeply investigates the physiological and cognitive origins of cybersickness in immersive environments. By analyzing user feedback, EEG, and heart rate variability, we aim to establish personalized mitigation strategies. We also develop dynamic field-of-view modulators and balance training systems (e.g., BalanceVR) to help users adapt to VR environments more comfortably.",
     techStacks: ['Unity / C#', 'Biosignals (EEG, ECG)', 'Statistical Analysis', 'User Study'],
     highlightPapers: [
@@ -35,7 +35,7 @@ const researchAreasData = [
     icon: "cpu",
     title: " Believable AI/ML",
     description: "Creating intelligent and believable virtual agents that enhance user interaction through affective computing and machine learning.",
-    image: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?q=80&w=1200&auto=format&fit=crop",
+    image: process.env.PUBLIC_URL + '/assets/img/research/believableXR.jpg',
     details: "Our fundamental HCI research focuses on the intersection of human psychology and artificial intelligence. We investigate how users perceive and interact with intelligent agents and affective postures. By understanding these dynamics, we create systems that foster trustworthiness, social presence, and believable interactions.",
     techStacks: ['Virtual Agents', 'Affective Computing', 'Python', 'Machine Learning'],
     highlightPapers: [
@@ -48,7 +48,7 @@ const researchAreasData = [
     icon: "eye",
     title: "Intelligence",
     description: "Exploring intuitive and efficient user interaction methods using eye-tracking and AI-driven predictive models.",
-    image: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?q=80&w=1200&auto=format&fit=crop",
+    image: process.env.PUBLIC_URL + '/assets/img/research/intelligence.png',
     details: "Eye-tracking and intelligent intent prediction are core modalities for next-generation spatial computing. We explore peripheral gaze interactions, natural object targeting, and gaze-based navigation techniques. Our goal is to minimize physical fatigue while maximizing interaction efficiency, enabling seamless, hands-free control in both VR and AR scenarios.",
     techStacks: ['Eye-Tracking', 'Spatial Computing', 'Intent Prediction', 'Unity / C#'],
     highlightPapers: [
@@ -61,7 +61,7 @@ const researchAreasData = [
     icon: "heart",
     title: "Empathy",
     description: "Designing systems that understand and respond to human emotions, fostering trustworthiness and social presence.",
-    image: "https://images.unsplash.com/photo-1558655146-364adaf1fcc9?q=80&w=1200&auto=format&fit=crop",
+    image: process.env.PUBLIC_URL + '/assets/img/research/empathy.png',
     details: "By understanding cognitive responses and biofeedback mechanisms, we create empathetic systems. We conduct human-centered studies to evaluate the impact of false but stable heart rate feedback and observer presence on user immersion, mental state, and performance during VR/AR usage.",
     techStacks: ['Biofeedback', 'Emotion Recognition', 'User Study', 'HCI'],
     highlightPapers: [
@@ -74,7 +74,7 @@ const researchAreasData = [
     icon: "users",
     title: "Accessibility",
     description: "Ensuring that immersive technologies are usable and accessible for diverse user groups, minimizing physical and cognitive barriers.",
-    image: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?q=80&w=1200&auto=format&fit=crop",
+    image: process.env.PUBLIC_URL + '/assets/img/research/lifter.png',
     details: "We aim to make XR technologies accessible to everyone. Our projects include hardware ergonomics like VR headset lifters to alleviate mental and physical fatigue, and adapting interfaces for different abilities. We focus on creating inclusive designs that adapt to users' unique needs and environments.",
     techStacks: ['Hardware Ergonomics', 'Human Factors', 'Inclusive Design', 'Mixed Reality'],
     highlightPapers: [
@@ -286,7 +286,7 @@ const PracticalApplicationsNetwork = () => {
     { id: 6, x: 88, y: 85, label: 'Mobility', type: 'app', icon: 'navigation' },
     
     { id: 7, x: 28, y: 55, label: 'Believable AI/ML', type: 'area', icon: 'cpu' },
-    { id: 8, x: 12, y: 32, label: 'Art Tech', type: 'app', icon: 'pen' },
+    { id: 8, x: 12, y: 32, label: 'Art Tech', type: 'app', icon: 'edit' },
     { id: 9, x: 12, y: 85, label: 'Virtual Human', type: 'app', icon: 'user' },
   ];
 
@@ -427,15 +427,6 @@ const Research = () => {
 
   const handleCardClick = (id) => {
     setSelectedId(id);
-
-    // 상세 설명 레이아웃으로 부드럽게 자동 스크롤
-    setTimeout(() => {
-      if (detailRef.current) {
-        const yOffset = -100; // sticky nav 메뉴 바 높이 보정
-        const y = detailRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      }
-    }, 150);
   };
 
   const handleAxCardClick = (id) => {

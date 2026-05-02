@@ -110,10 +110,90 @@ const professorInfo = {
     ]
 };
 
+const awardDetails = [
+    { category: 'service', nameKo: '건양대학교 총장 표창', nameEn: "University President's Commendation", 
+        institutionKo: '건양대학교', institutionEn: 'Konyang University', 
+        detailKo: '글로컬대학30 사업 국방XR학부 신설 및 다전공 활성화 기여에 대한 공로', detailEn: 'Recognized for contributions to the Glocal University 30 project', 
+        collaboratorsKo: '개인 수상', collaboratorsEn: 'Individual award', year: '2026.02.06' },
+    { category: 'paper', nameKo: '우수 논문상', nameEn: 'Best Paper Award', institutionKo: 
+        '한국인공지능융합기술학회', institutionEn: 'Korea AI&X Technology Society', detailKo: '아동 음성 분석을 통한 SELSI 기준 표현 언어 발달 단계 분류 모델', 
+        detailEn: 'Research award for outstanding academic presentation', collaboratorsKo: '이신화, 이지수, 김지우, 김소연, 김한섭*, 김웅식', 
+        collaboratorsEn: 'Collaborative research presentation', year: '2025.05.27' },
+    { category: 'paper', nameKo: '우수 논문상', nameEn: 'Best Paper Award', institutionKo: 
+        '한국인공지능융합기술학회', institutionEn: 'Korea AI&X Technology Society', detailKo: '망치운동게임: 악력 센서를 활용한 웹 기반 헌혈 보조 게임', 
+        detailEn: 'Research award for outstanding academic presentation', collaboratorsKo: '김다빈, 유진, 최승효, 이수현, 김한섭*, 김웅식', 
+        collaboratorsEn: 'Collaborative research presentation', year: '2025.05.27' },
+    { category: 'service', nameKo: 'KU Achievement Award', nameEn: 'KU Achievement Award', institutionKo: '고려대학교', 
+        institutionEn: 'Korea University', detailKo: '박사과정생 연구 및 학술 활동 성과에 대한 공로상', 
+        detailEn: 'Achievement award for research and academic contributions', collaboratorsKo: '개인 수상', 
+        collaboratorsEn: 'Individual award', year: '2025.02.20' },
+    { category: 'paper', nameKo: '우수 발표 논문상', nameEn: 'Best Presentation Award', institutionKo: 
+        'APMAR 2024', institutionEn: 'APMAR 2024', detailKo: '학술 발표 우수성에 대한 연구논문상', 
+        detailEn: 'Research presentation award for outstanding academic presentation', collaboratorsKo: '신혜민, 김한섭*, 이재윤, 김정현', 
+        collaboratorsEn: 'Collaborative research presentation', year: '2024.11.30' },
+    { category: 'paper', nameKo: '우수 포스터 논문상', nameEn: 'Best Poster Award', institutionKo: 
+        'ACM VRST 2023 Conference', institutionEn: 'ACM VRST 2023 Conference', detailKo: 'The Effect of False but Stable Heart Rate Feedback via Sound and Vibration on VR', 
+        detailEn: 'Research poster award for outstanding academic poster presentation', collaboratorsKo: '주동윤, 김한섭*, 김정현', 
+        collaboratorsEn: 'Collaborative research presentation', year: '2023.10.10' },
+    { category: 'paper', nameKo: '우수 연구상', nameEn: 'Outstanding Research Award', institutionKo: '한국전자정보통신산업진흥회', 
+        institutionEn: 'Korea Electronics Association (KEA)', detailKo: 'BalanceVR: Balance Training to Increase Tolerance to Cybersickness', 
+        detailEn: 'BalanceVR: Balance Training to Increase Tolerance to Cybersickness in Immersive Virtual Reality', collaboratorsKo: '김재훈, 강성훈, 양예찬, 김한섭*, 김정현', collaboratorsEn: 'Individual award', year: '2023.08.31' },
+    { category: 'service', nameKo: 'AIR Outstanding Technology', nameEn: 'AIR Outstanding Technology', institutionKo: 'KIST AI Robotic Center', institutionEn: 'KIST AI Robotic Center', detailKo: '우수 기술 기여에 대한 공로상', detailEn: 'Service award for outstanding technology contribution', collaboratorsKo: '개인 수상', collaboratorsEn: 'Center project contribution', year: '2022.12.21' },
+    { category: 'service', nameKo: 'Outstanding Graduate Student', nameEn: 'Outstanding Graduate Student', 
+        institutionKo: 'KIST, 한국과학기술연구원', institutionEn: 'KIST, Korea Institute of Science and Technology', 
+        detailKo: '석사과정생 연구 수행 및 기관 기여에 대한 공로상', detailEn: 'Service award for graduate research and institutional contribution', collaboratorsKo: '개인 수상', collaboratorsEn: 'Individual award', year: '2021.08.25' },
+    { type: 'header', titleKo: 'Undergraduate Awards', titleEn: 'Undergraduate Awards' },
+    { category: 'competition', nameKo: '대학 창업 경진대회 우수상', nameEn: 'Excellence Award, University Startup Competition', 
+        institutionKo: '광주광역시청', institutionEn: 'Gwangju Metropolitan City Hall', 
+        detailKo: '창업 아이디어 및 사업화 계획 우수성에 대한 경진대회 수상', 
+        detailEn: 'Competition award for startup idea and business plan excellence', 
+        collaboratorsKo: '김한섭*, 김진혁, 김해지, 이윤식, 김기용', collaboratorsEn: 'Team award', year: '2019.01.10' },
+    { category: 'paper', nameKo: '학부생 우수논문상', nameEn: 'Best Paper in Undergraduate Student', institutionKo: '한국컴퓨터그래픽스학회', 
+        institutionEn: 'Korea Computer Graphics Society', detailKo: '학부 연구논문 우수성에 대한 연구논문상', 
+        detailEn: 'Research paper award for undergraduate research excellence', 
+        collaboratorsKo: '김한섭*, 이지은', collaboratorsEn: 'Hanseob Kim, Jieun Lee', year: '2018.07.13' },
+    { category: 'competition', nameKo: 'IT Conference 프로젝트 경진대회 은상', nameEn: 'Silver Award, IT Conference Project Competition', 
+        institutionKo: '조선대학교', institutionEn: 'Chosun University', detailKo: '프로젝트 구현 및 발표 우수성에 대한 경진대회 수상', 
+        detailEn: 'Competition award for project implementation and presentation', 
+        collaboratorsKo: '김한섭*, 김진혁, 김해지, 이윤식, 김기용', collaboratorsEn: 'Team award', year: '2018.11.29' },
+    { category: 'competition', nameKo: '캡스톤 디자인 경진대회 대상', 
+        nameEn: 'Grand Award, Capstone Design Competition', institutionKo: 'LINC+, 조선대학교', 
+        institutionEn: 'LINC+, Chosun University', detailKo: '캡스톤 디자인 결과물 우수성에 대한 경진대회 수상', 
+        detailEn: 'Competition award for capstone design excellence', 
+        collaboratorsKo: '김한섭*, 김진혁, 김해지, 이윤식, 김기용', collaboratorsEn: 'Team award', year: '2018.11.27' },
+    { category: 'competition', nameKo: 'SW 해커톤 대상', 
+        nameEn: 'Grand Award, SW Hackathon', institutionKo: '조선대학교', 
+        institutionEn: 'Chosun University', detailKo: '소프트웨어 해커톤 프로젝트 우수성에 대한 경진대회 수상', 
+        detailEn: 'Competition award for software hackathon project excellence', collaboratorsKo: '팀 수상', 
+        collaboratorsEn: 'Team award', year: '2018.11.10' },
+    { category: 'competition', nameKo: '캡스톤 디자인 경진대회 대상', 
+        nameEn: 'Grand Award, Capstone Design Competition', 
+        institutionKo: '조선대학교 공학교육혁신센터', institutionEn: 'Engineering Education Innovation Center, Chosun University', 
+        detailKo: '공학 설계 결과물 우수성에 대한 경진대회 수상', detailEn: 'Competition award for engineering design excellence', 
+        collaboratorsKo: '김한섭*, 김진혁, 김해지, 이윤식, 김기용', collaboratorsEn: 'Team award', year: '2018.10.02' },
+    { category: 'competition', nameKo: 'Healthcare IoT Project 우수팀 1위', 
+        nameEn: 'Outstanding Team, Healthcare IoT Project', 
+        institutionKo: 'Qualcomm Institute, University of San Diego', institutionEn: 'Qualcomm Institute, University of San Diego', detailKo: '헬스케어 IoT 프로젝트 우수성에 대한 경진대회 수상', detailEn: 'Competition award for healthcare IoT project excellence', collaboratorsKo: '팀 수상', collaboratorsEn: 'Team award', year: '2018.02.20' },
+    { category: 'paper', nameKo: 'IT Conference 논문발표 최우수상', 
+        nameEn: 'Best Paper, IT Conference Presentation', institutionKo: '조선대학교', institutionEn: 'Chosun University', detailKo: '논문 발표 우수성에 대한 연구논문상', detailEn: 'Research paper award for outstanding conference paper presentation', collaboratorsKo: '공동저자 수상', collaboratorsEn: 'Co-author award', year: '2017.11.23' },
+    { category: 'competition', nameKo: 'SW 해커톤 동상', nameEn: 'Bronze Award, SW Hackathon', institutionKo: '조선대학교', institutionEn: 'Chosun University', detailKo: '소프트웨어 해커톤 프로젝트 우수성에 대한 경진대회 수상', detailEn: 'Competition award for software hackathon project excellence', collaboratorsKo: '팀 수상', collaboratorsEn: 'Team award', year: '2017.11.11' },
+    { category: 'competition', nameKo: 'SW 오픈소스 해커톤 특별상', nameEn: 'Special Award, SW Open-source Hackathon', institutionKo: '한국정보과학회', institutionEn: 'Korea Computer Congress', detailKo: '오픈소스 기반 개발 결과물에 대한 경진대회 수상', detailEn: 'Competition award for open-source development project', collaboratorsKo: '팀 수상', collaboratorsEn: 'Team award', year: '2017.09.17' },
+    { category: 'competition', nameKo: '기업분석 경진대회 대상', nameEn: 'Grand Award, Company Analysis Competition', institutionKo: 'Anygent Inc.', institutionEn: 'Anygent Inc.', detailKo: '기업 분석 및 발표 우수성에 대한 경진대회 수상', detailEn: 'Competition award for company analysis and presentation excellence', collaboratorsKo: '팀 수상', collaboratorsEn: 'Team award', year: '2017.01.20' },
+    { category: 'competition', nameKo: '학생 자치팀 프로젝트 경진대회 우수상', nameEn: 'Excellence Award, Student Autonomy Team Project Competition', institutionKo: '조선대학교', institutionEn: 'Chosun University', detailKo: '학생 자치 프로젝트 성과에 대한 경진대회 수상', detailEn: 'Competition award for student-led project achievement', collaboratorsKo: '팀 수상', collaboratorsEn: 'Team award', year: '2017.01.09' },
+    { category: 'competition', nameKo: 'IoT Academy 프로젝트 경진대회 대상', nameEn: 'Grand Award, IoT Academy Project Competition', institutionKo: '스마트인재개발원', institutionEn: 'Smart Human Resource Development Institute', detailKo: 'IoT 프로젝트 구현 우수성에 대한 경진대회 수상', detailEn: 'Competition award for IoT project implementation excellence', collaboratorsKo: '팀 수상', collaboratorsEn: 'Team award', year: '2016.07.25' },
+];
+
+const awardCategoryMeta = {
+    paper: { ko: '연구논문', en: 'Research', color: '#2f6f5e', bg: '#e0f2eb', border: '#b8decd' },
+    service: { ko: '공로', en: 'Service', color: '#856404', bg: '#fff3cd', border: '#f1dda0' },
+    competition: { ko: '경진대회', en: 'Contest', color: '#7a4f9a', bg: '#f0e6f7', border: '#d9c3e9' },
+};
+
 const ProfessorProfile = () => {
     const professor = professorInfo;
     const [isUndergradAwardsOpen, setIsUndergradAwardsOpen] = useState(false);
     const [showExternalOnly, setShowExternalOnly] = useState(true); // 기본값: 모두 포함
+    const [awardLanguage, setAwardLanguage] = useState('ko');
     const alert = useAlert();
 
     const handleCopyEmail = (e, email) => {
@@ -122,9 +202,42 @@ const ProfessorProfile = () => {
         alert.show('이메일이 복사되었습니다.');
     };
 
-    const undergradAwardsIndex = professor.awards.findIndex(a => a.type === 'header');
-    const gradAwards = undergradAwardsIndex === -1 ? professor.awards : professor.awards.slice(0, undergradAwardsIndex);
-    const undergradAwards = undergradAwardsIndex === -1 ? [] : professor.awards.slice(undergradAwardsIndex + 1);
+    const undergradAwardsIndex = awardDetails.findIndex(a => a.type === 'header');
+    const gradAwards = undergradAwardsIndex === -1 ? awardDetails : awardDetails.slice(0, undergradAwardsIndex);
+    const undergradAwards = undergradAwardsIndex === -1 ? [] : awardDetails.slice(undergradAwardsIndex + 1);
+    const awardItems = awardDetails.filter(award => award.type !== 'header');
+    const awardStats = [
+        { label: '연구논문상', count: awardItems.filter(award => award.category === 'paper').length },
+        { label: '공로상', count: awardItems.filter(award => award.category === 'service').length },
+        { label: '경진대회수상', count: awardItems.filter(award => award.category === 'competition').length },
+    ];
+    const isAwardKorean = awardLanguage === 'ko';
+    const renderAwardItem = (award, index) => {
+        const category = awardCategoryMeta[award.category];
+        return (
+            <li key={index} className="award-detail-item">
+                <span
+                    className="award-category-badge"
+                    style={{
+                        color: category.color,
+                        backgroundColor: category.bg,
+                        borderColor: category.border
+                    }}
+                >
+                    {isAwardKorean ? category.ko : category.en}
+                </span>
+                <div className="award-detail-content">
+                    <div className="fw-bold text-dark">{isAwardKorean ? award.nameKo : award.nameEn}</div>
+                    <div className="text-muted small">
+                        {isAwardKorean ? award.institutionKo : award.institutionEn} <span className="mx-1">|</span> {award.year} <span className="mx-1">|</span> {isAwardKorean ? award.collaboratorsKo : award.collaboratorsEn}
+                    </div>
+                    <div className="small" style={{ color: '#495057' }}>
+                        {isAwardKorean ? award.detailKo : award.detailEn}
+                    </div>
+                </div>
+            </li>
+        );
+    };
 
     const filteredProfessionalActivities = professor.professionalActivities.filter(
         activity => showExternalOnly ? activity.type !== 'internal' : true
@@ -185,6 +298,84 @@ const ProfessorProfile = () => {
                     }
                     .prof-scrollable-content::-webkit-scrollbar-thumb:hover {
                         background: #adb5bd;
+                    }
+                    .award-stats {
+                        display: flex;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        color: #6c757d;
+                        font-size: 0.85rem;
+                        font-weight: 700;
+                    }
+                    .award-stat-count {
+                        color: #8b0029;
+                        font-weight: 800;
+                    }
+                    .award-stat-divider {
+                        margin: 0 0.55rem;
+                        color: rgba(108, 117, 125, 0.55);
+                    }
+                    .award-stat-item {
+                        white-space: nowrap;
+                    }
+                    .award-language-toggle {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.35rem;
+                        flex-shrink: 0;
+                    }
+                    .award-language-toggle button {
+                        border: 1px solid #dee2e6;
+                        border-radius: 0.25rem;
+                        background: #f8f9fa;
+                        color: #6c757d;
+                        font-size: 0.72rem;
+                        font-weight: 700;
+                        line-height: 1.2;
+                        padding: 0.22rem 0.45rem;
+                        transition: all 0.2s ease;
+                    }
+                    .award-language-toggle button.active {
+                        background-color: rgba(139, 0, 41, 0.08);
+                        border-color: rgba(139, 0, 41, 0.35);
+                        color: #8b0029;
+                    }
+                    .award-detail-item {
+                        display: flex;
+                        align-items: flex-start;
+                        gap: 0.55rem;
+                        padding: 0.25rem 0;
+                        border-bottom: 1px solid #f1f3f5;
+                    }
+                    .award-detail-item:last-child {
+                        border-bottom: 0;
+                        padding-bottom: 0;
+                    }
+                    .award-category-badge {
+                        width: 64px;
+                        border: 1px solid;
+                        border-radius: 0.25rem;
+                        padding: 0.18rem 0.28rem;
+                        text-align: center;
+                        font-size: 0.75em;
+                        font-weight: 4500;
+                        line-height: 1;
+                        white-space: nowrap;
+                        flex-shrink: 0;
+                        margin-top: 0.18rem;
+                    }
+                    .award-detail-content {
+                        min-width: 0;
+                    }
+                    @media (max-width: 575.98px) {
+                        .award-stats {
+                            width: 100%;
+                            justify-content: flex-start;
+                        }
+                        .award-detail-item {
+                            flex-direction: column;
+                            gap: 0.5rem;
+                        }
                     }
                 `}
             </style>
@@ -365,16 +556,41 @@ const ProfessorProfile = () => {
                         {/* Awards */}
                         <div className="card shadow-sm mb-4">
                             <div className="card-header bg-white border-0 p-4 pb-0">
-                                <h4 className="fw-bolder text-crimson mb-0">Awards & Honors</h4>
+                                <div className="d-flex flex-column flex-lg-row justify-content-between align-items-lg-start gap-3">
+                                    <div>
+                                        <h4 className="fw-bolder text-crimson mb-2">Awards & Honors</h4>
+                                        <div className="award-stats" aria-label="Award statistics">
+                                            {awardStats.map((stat, index) => (
+                                                <React.Fragment key={stat.label}>
+                                                    {index > 0 && <span className="award-stat-divider">|</span>}
+                                                    <span className="award-stat-item">
+                                                        {stat.label} <span className="award-stat-count">{stat.count}</span>
+                                                    </span>
+                                                </React.Fragment>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div className="award-language-toggle" role="group" aria-label="Award language">
+                                        <button
+                                            type="button"
+                                            className={awardLanguage === 'ko' ? 'active' : ''}
+                                            onClick={() => setAwardLanguage('ko')}
+                                        >
+                                            KOR
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className={awardLanguage === 'en' ? 'active' : ''}
+                                            onClick={() => setAwardLanguage('en')}
+                                        >
+                                            ENG
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                             <div className="card-body p-4">
-                                <ul className="list-unstyled">
-                                    {gradAwards.map((award, index) => (
-                                        <li key={index} className="mb-3">
-                                            <span className="fw-bold">{award.name}</span>
-                                            <span className="text-muted small"> | {(award.event || award.institution)}, {(award.year || award.duration)}</span>
-                                        </li>
-                                    ))}
+                                <ul className="list-unstyled mb-0">
+                                    {gradAwards.map((award, index) => renderAwardItem(award, index))}
                                 </ul>
                                 {undergradAwards.length > 0 && (
                                     <>
@@ -388,20 +604,15 @@ const ProfessorProfile = () => {
                                             aria-expanded={isUndergradAwardsOpen}
                                             className="text-decoration-none"
                                         >
-                                            <h5 className="fw-bold small text-uppercase text-muted mt-4 mb-3 d-flex justify-content-between align-items-center">
-                                                Undergraduate Awards
+                                            <h5 className="fw-bold small text-muted mt-4 mb-3 d-flex justify-content-between align-items-center">
+                                                {isAwardKorean ? 'Undergraduate Awards' : 'Undergraduate Awards'}
                                                 <FeatherIcon icon={isUndergradAwardsOpen ? 'chevron-up' : 'chevron-down'} size="18" />
                                             </h5>
                                         </a>
                                         <Collapse in={isUndergradAwardsOpen}>
                                             <div id="undergrad-awards-collapse">
-                                                <ul className="list-unstyled pt-2">
-                                                    {undergradAwards.map((award, index) => (
-                                                        <li key={index} className="mb-3">
-                                                            <span className="fw-bold">{award.name}</span>
-                                                            <span className="text-muted small"> | {(award.event || award.institution)}, {(award.year || award.duration)}</span>
-                                                        </li>
-                                                    ))}
+                                                <ul className="list-unstyled pt-2 mb-0">
+                                                    {undergradAwards.map((award, index) => renderAwardItem(award, index))}
                                                 </ul>
                                             </div>
                                         </Collapse>

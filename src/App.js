@@ -2,7 +2,8 @@ import React from "react";
 import {
   HashRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 
 
@@ -45,9 +46,7 @@ const options = {
 function App() {
   return (
     <AlertProvider template={AlertTemplate} {...options}>
-      <Router
-         basename={"/Labsite"}
-      >
+      <Router>
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
           <TopNav />
           <div id="layoutSidenav_content" style={{ display: 'flex', flexDirection: 'column', flex: '1 0 auto', position: 'relative', zIndex: 1 }}>
@@ -66,6 +65,8 @@ function App() {
               <Route path="/gallery" exact component={Gallery} />
               <Route path="/join-us" exact component={JoinUs} />
       
+              {/* 정의되지 않은 주소(예: /index)로 접근 시 메인 화면으로 자동 이동 */}
+              <Redirect from="*" to="/" />
        
             </Switch>
 

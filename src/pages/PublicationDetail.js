@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import FeatherIcon from 'feather-icons-react';
+import { useAlert } from 'react-alert';
 import { publicationsData } from './Publication';
 
 const PublicationDetail = ({ match }) => {
@@ -24,11 +25,19 @@ const PublicationDetail = ({ match }) => {
       caption: '',
       citation: ''
   };
+  const alert = useAlert();
 
   // 페이지 마운트 시 최상단으로 스크롤 이동
   useEffect(() => {
       window.scrollTo(0, 0);
   }, []);
+
+  const handleCopyCitation = () => {
+    if (pub.citation) {
+      navigator.clipboard.writeText(pub.citation);
+      alert.show('인용문이 복사되었습니다!', { type: 'success' });
+    }
+  };
 
   return (
     <div className="container-xl px-4 mt-5 mb-5">
@@ -54,6 +63,28 @@ const PublicationDetail = ({ match }) => {
           .btn-light-crimson-hover:hover, .btn-light-crimson-hover:focus {
             border-color: #8b0029;
             background-color: #f8f9fa;
+          }
+          .citation-copy-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #8b0029;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+          }
+          .citation-copy-btn:hover {
+            background-color: #8b0029;
+            color: white;
+            border-color: #8b0029;
+          }
+          .citation-copy-btn:hover svg {
+            stroke: white !important;
           }
         `}
       </style>
@@ -138,6 +169,10 @@ const PublicationDetail = ({ match }) => {
                 <pre className="bg-light p-4 rounded border text-dark" style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word', fontSize: '0.95rem', fontFamily: 'monospace' }}>
 {pub.citation}
                 </pre>
+                <button className="citation-copy-btn d-flex align-items-center" onClick={handleCopyCitation}>
+                  <FeatherIcon icon="copy" className="me-2" style={{ stroke: '#8b0029', width: 16, height: 16 }} />
+                  복사하기
+                </button>
               </div>
             </>
           )}

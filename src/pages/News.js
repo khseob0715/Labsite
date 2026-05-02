@@ -552,6 +552,15 @@ const News = () => {
             opacity: 0;
             animation: fadeInUp 0.6s ease-out forwards;
           }
+          .news-filter-bar {
+            position: sticky;
+            top: 78px;
+            z-index: 1020;
+            padding: 0.85rem 0;
+            background-color: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(33, 40, 50, 0.08);
+          }
           .timeline-left-container {
             position: relative;
             padding-left: 160px;
@@ -614,6 +623,13 @@ const News = () => {
             box-shadow: 0 0 0 2px rgba(0,0,0,0.05);
           }
           @media (max-width: 767.98px) {
+            .news-filter-bar {
+              top: 64px;
+              align-items: stretch !important;
+            }
+            .news-filter-bar .btn-group {
+              flex-wrap: wrap;
+            }
             .timeline-left-container {
               padding-left: 20px;
             }
@@ -674,12 +690,12 @@ const News = () => {
       </style>
       <div className="text-center mb-5">
         <h1 className="display-5 fw-bolder">Activities</h1>
-        <p className="lead text-muted">Stay updated with the latest happenings at DXP Lab.</p>
+        <p className="lead text-muted">Stay updated with the latest happenings at IMX Lab.</p>
         <hr className="w-25 mx-auto" />
       </div>
       <div className="row justify-content-center">
         {/* Navigation & Filters */}
-        <div className="col-lg-12 d-flex flex-column flex-md-row justify-content-between align-items-center mb-5 gap-3">
+        <div className="col-lg-12 d-flex flex-column flex-md-row justify-content-between align-items-center mb-5 gap-3 news-filter-bar">
           {/* Year Navigation */}
           <div className="btn-group shadow-sm" role="group" aria-label="Year navigation">
             {sortedYears.map(year => (

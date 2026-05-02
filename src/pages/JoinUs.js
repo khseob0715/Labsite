@@ -28,7 +28,7 @@ const JoinUs = () => {
                     <h4 className="fw-bolder mb-0">Graduate Students & Interns</h4>
                   </div>
                   <p className="text-dark mb-4">
-                    DXP Lab은 가상현실(VR), 증강현실(AR), 확장현실(XR), 인간-컴퓨터 상호작용(HCI), 인공지능(AI), 실감미디어가 융합되는 지점에서 새로운 연구 문제를 탐구하는 연구실입니다.
+                    IMX Lab은 가상현실(VR), 증강현실(AR), 확장현실(XR), 인간-컴퓨터 상호작용(HCI), 인공지능(AI), 실감미디어가 융합되는 지점에서 새로운 연구 문제를 탐구하는 연구실입니다.
                   </p>
                   <p className="text-dark mb-4">
                     본 연구실은 박사과정생, 석사과정생, 학부연구생과 함께 <strong className="text-dark">학술적 가치와 실용적 가치</strong>를 동시에 갖는 연구를 수행하는 것을 목표로 하고 있습니다.

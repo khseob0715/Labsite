@@ -11,7 +11,7 @@ const images = [
         caption: '인간과 기술의 조화를 목표로 혁신적인 상호작용을 연구합니다.'
     },
     {
-        src: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2684&auto=format&fit=crop',
+        src: process.env.PUBLIC_URL + '/assets/img/home/research.png',
         alt: 'Second slide',
         title: 'Pioneering Research',
         caption: '가상현실(VR), 증강현실(AR), 사용자 경험(UX) 등 다양한 분야를 탐구합니다.'

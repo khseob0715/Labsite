@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import FeatherIcon from 'feather-icons-react';
 
 // Placeholder data for funded projects
 const fundedProjectsData = [
@@ -11,6 +12,17 @@ const fundedProjectsData = [
     duration: '2026.03 - 2029.02',
     fundingSource: 'NRF, Republic of Korea',
     amount: '₩ 240,000,000',
+    status: '진행중'
+  },
+  {
+    grantType: 'New Faculty Funding',
+    title: 'Development of VR Sickness Reduction Techniques for Hyper-Realistic XR and Usability Evaluation',
+    titleKr: '초실감 XR을 위한 가상현실 멀미 저감 기법 개발 및 사용성 평가',
+    pi: '김한섭',
+    collaborators: '',
+    duration: '2025.04 - 2026.03',
+    fundingSource: 'Heeyoung Academic & Cultural Foundation, Republic of Korea',
+    // amount: '₩ 50,000,000',
     status: '진행중'
   },
   {
@@ -151,6 +163,32 @@ const Project = () => {
   const [filter, setFilter] = useState('All'); // All, 진행중, 종료
   const [sortOrder, setSortOrder] = useState('최신순'); // 최신순, 오래된순
   const [myProjectsOnly, setMyProjectsOnly] = useState(false); // 내 과제만 보기 토글 상태
+  const [showTopBtn, setShowTopBtn] = useState(false); // Scroll to top 상태
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
+
+  const handleCopyEmail = (e) => {
+    navigator.clipboard.writeText('khseob0715@gmail.com');
+    setTooltipPos({ x: e.clientX, y: e.clientY });
+    setShowTooltip(true);
+    setTimeout(() => setShowTooltip(false), 1000);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowTopBtn(true);
+      } else {
+        setShowTopBtn(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const filteredProjects = fundedProjectsData.filter(p => {
     if (filter !== 'All' && p.status !== filter) return false;
@@ -159,13 +197,88 @@ const Project = () => {
   });
 
   const sortedProjects = filteredProjects.sort((a, b) => {
-    const dateA = new Date(a.duration.split(' - ')[0].replace('.', '-'));
-    const dateB = new Date(b.duration.split(' - ')[0].replace('.', '-'));
-    return sortOrder === '최신순' ? dateB - dateA : dateA - dateB;
+    const dateA = a.duration.split(' - ')[0];
+    const dateB = b.duration.split(' - ')[0];
+    return sortOrder === '최신순' ? dateB.localeCompare(dateA) : dateA.localeCompare(dateB);
   });
 
+  // Calculate dashboard statistics
+  const totalProjects = fundedProjectsData.length;
+  let totalPIProjects = 0;
+  let totalPIFunding = 0;
+
+  fundedProjectsData.forEach(p => {
+    if (p.pi.includes('김한섭')) {
+      totalPIProjects++;
+      if (p.amount) {
+        const amountInKRW = parseInt(p.amount.replace('₩ ', '').replace(/,/g, ''));
+        if (!isNaN(amountInKRW)) totalPIFunding += amountInKRW;
+      }
+    }
+  });
+
+  const totalPIFundingInTenMillions = (totalPIFunding / 10000000).toLocaleString(undefined, {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 1
+  });
+
+  const fundingSources = [
+      '한국연구재단 (NRF)', '정보통신기획평가원 (IITP)', '한국콘텐츠진흥원 (KOCCA)', 
+      '국가과학기술연구회 (NST)', '중소벤처기업부', '희영학술문화재단'
+  ];
+  
+  const fundingBadges = (
+      <div className="d-flex flex-wrap gap-2">
+          {fundingSources.map((source, index) => (
+              <span key={index} className="badge bg-light text-dark border" style={{ fontSize: '0.8rem', fontWeight: '500' }}>{source}</span>
+          ))}
+      </div>
+  );
+
+  const getColorsByType = (type) => {
+    switch (type) {
+      case 'university': return { bgColor: '#f0e6f7' };
+      case 'research': return { bgColor: '#e0f2eb' };
+      case 'company': return { bgColor: '#d5e9fa' };
+      case 'localGovernment': return { bgColor: 'rgb(255, 252, 240)' };
+      default: return { bgColor: 'rgba(108, 117, 125, 0.1)', textColor: '#6c757d' };
+    }
+  };
+
+  const manualCollaboratorNames = [
+    { name: '고려대학교', type: 'university' },
+    { name: '건양대학교', type: 'university' },
+    { name: 'KIST', type: 'research' },
+    { name: '부산대학교', type: 'university' },
+    { name: '전남대학교', type: 'university' },
+    { name: '한성대학교', type: 'university' },
+    { name: '울산대학교', type: 'university' },
+    { name: '국립금오공과대학교', type: 'university' },
+    { name: 'NAIST', type: 'research' },
+    { name: 'ETRI', type: 'research' },
+    { name: '논산시청소년청년재단', type: 'localGovernment' },
+    { name: '대전정보문화진흥원', type: 'localGovernment' },
+    { name: '대전시청자미디어센터', type: 'localGovernment' },
+    { name: '에픽게임즈코리아', type: 'company' },
+    { name: '비지트', type: 'company' },
+    { name: '씨지픽셀', type: 'company' },
+  ];
+
+  const collaborationBadgesContent = (
+    <div className="d-flex flex-wrap gap-2">
+      {[...manualCollaboratorNames].sort((a, b) => a.name.localeCompare(b.name)).map((collaborator, index) => {
+        const colors = getColorsByType(collaborator.type);
+        return (
+          <span key={index} className="badge text-dark border" style={{backgroundColor: colors.bgColor, color: colors.textColor, fontSize: '0.8rem', fontWeight: '500'}}>
+            {collaborator.name}
+          </span>
+        );
+      })}
+    </div>
+  );
+
   return (
-    <div className="container-xl px-4 mt-5 mb-5">
+    <div className="container-fluid px-4 px-lg-5 mt-5 mb-5">
       <style>
         {`
           #myProjectSwitch:checked {
@@ -177,6 +290,22 @@ const Project = () => {
             outline: 0;
             box-shadow: 0 0 0 0.25rem rgba(139, 0, 41, 0.25);
           }
+          @keyframes pulse-green {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(40, 167, 69, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+          }
+          .blob-green {
+            background: #28a745;
+            border-radius: 50%;
+            height: 12px;
+            width: 12px;
+            animation: pulse-green 2s infinite;
+          }
+          .collab-card:hover {
+            background-color: rgba(40, 167, 69, 0.1) !important;
+            transform: translateY(-2px);
+          }
         `}
       </style>
       <div className="text-center mb-5">
@@ -185,8 +314,8 @@ const Project = () => {
         <hr className="w-25 mx-auto" />
       </div>
 
-      {/* Filters and Sorting */}
-      <div className="d-flex justify-content-center align-items-center mb-4 gap-3">
+      {/* Filters and Sorting - Moved to span full width and be above the columns */}
+      <div className="d-flex flex-wrap justify-content-center align-items-center mb-4 gap-3">
           <div className="btn-group">
               <button className={`btn btn-sm ${filter === 'All' ? 'btn-dark' : 'btn-outline-dark'}`} onClick={() => setFilter('All')}>All</button>
               <button className={`btn btn-sm ${filter === '진행중' ? 'btn-dark' : 'btn-outline-dark'}`} onClick={() => setFilter('진행중')}>Ongoing</button>
@@ -198,43 +327,146 @@ const Project = () => {
           </select>
           <div className="form-check form-switch ms-2 d-flex align-items-center">
               <input 
-                  className="form-check-input mt-0 me-2" 
+                  className="form-check-input mt-0 me-2 flex-shrink-0" 
                   type="checkbox" 
                   id="myProjectSwitch" 
                   checked={myProjectsOnly} 
                   onChange={(e) => setMyProjectsOnly(e.target.checked)} 
                   style={{ cursor: 'pointer' }} 
               />
-              <label className={`form-check-label small fw-bold ${myProjectsOnly ? '' : 'text-muted'}`} htmlFor="myProjectSwitch" style={{ cursor: 'pointer', paddingTop: '2px', color: myProjectsOnly ? '#8b0029' : '' }}>연구책임자 과제만 보기</label>
+              <label className={`form-check-label small fw-bold text-nowrap ${myProjectsOnly ? '' : 'text-muted'}`} htmlFor="myProjectSwitch" style={{ cursor: 'pointer', paddingTop: '2px', color: myProjectsOnly ? '#8b0029' : '' }}>연구책임자 과제만 보기</label>
           </div>
       </div>
 
-      <div className="row justify-content-center">
-        {sortedProjects.map((project, index) => (
-          <div className="col-lg-10 mb-4" key={index}>
-            <div className="card shadow-sm h-100 border-0 lift">
-              <div className="card-body p-4">
-                <div className="d-flex justify-content-between align-items-start">
-                  <div>
-                    {project.grantType && <div className="fw-bold mb-1" style={{ color: '#8b0029', fontSize: '0.9rem' }}>{project.grantType}</div>}
-                    <h4 className="fw-bolder text-dark mb-1">{project.title}</h4>
-                    {project.titleKr && <div className="text-muted small mb-3">{project.titleKr}</div>}
+      {/* Main Content Area: Project List */}
+      <div className="row">
+        {/* Left Column: Stats Summary (Dashboard) */}
+        <div className="col-lg-3 mb-5 mb-lg-0">
+          <div className="sticky-top" style={{ top: '100px' }}>
+            <div className="card shadow-sm mb-3" style={{ borderRadius: '12px', border: 'none',  borderLeft: '5px solid #8b0029' }}>
+            <div className="card-body p-4">
+              {/* <h5 className="fw-bolder mb-4" style={{ color: '#8b0029' }}>Dashboard</h5> */}
+              <ul className="list-unstyled mb-0">
+                <li className="mb-4 row">
+                  <div className="col-6">
+                    <div className="fw-bold text-dark mb-1" style={{ fontSize: '1rem' }}>총 수행 과제 (책임)</div>
+                    <div className="fw-bolder " style={{ fontSize: '1.1rem', color: '#8b0029' }}>{totalProjects}건 ({totalPIProjects}건)</div>
                   </div>
-                  <span className={`badge ${project.status === '진행중' ? '' : 'bg-dark'} mt-1 text-nowrap ms-3 px-2 py-1`} style={{ fontSize: '0.85rem', backgroundColor: project.status === '진행중' ? '#8b0029' : '' }}>{project.status}</span>
-                </div>
-                <div className="small text-muted">
-                  <span><strong>책임:</strong> {project.pi}</span>
-                  {project.collaborators && <span className="mx-2">|</span>}
-                  {project.collaborators && <span><strong>협력:</strong> {project.collaborators}</span>}
-                  <span className="mx-2">|</span>
-                  <span><strong>기간:</strong> {project.duration}</span>
-                  <span className="mx-2">|</span>
-                  <span><strong>지원:</strong> {project.fundingSource} {project.amount ? `(${project.amount})` : ''}</span>
+                  <div className="col-6">
+                    <div className="fw-bold text-dark mb-1" style={{ fontSize: '1rem' }}>책임과제 총 연구비</div>
+                    <div className="fw-bolder " style={{ fontSize: '1.1rem', color: '#8b0029' }}>{totalPIFundingInTenMillions} 천만원</div>
+                  </div>
+                </li>
+                <li className="mb-4">
+                  <div className="fw-bold text-dark mb-2" style={{ fontSize: '0.9rem' }}>연구 지원 기관</div>
+                  {fundingBadges}
+                </li>
+                <li>
+                  <div className="fw-bold text-dark mb-2" style={{ fontSize: '0.9rem' }}>주요 협력 기관</div>
+                  {collaborationBadgesContent}
+                </li>
+              </ul>
+            </div>
+            </div>
+
+            {/* Open for Collaboration Card */}
+            <div 
+              className="card shadow-sm collab-card" 
+              onClick={handleCopyEmail}
+              style={{ borderRadius: '12px', backgroundColor: 
+                'rgba(40, 167, 69, 0.05)', border: '1px solid rgba(40, 167, 69, 0.2)', 
+                cursor: 'pointer', transition: 'all 0.2s ease' }}
+              title="클릭하여 이메일 주소 복사"
+            >
+              <div className="card-body p-3 d-flex align-items-center">
+                <div className="blob-green flex-shrink-0 m-0 me-3"></div>
+                <div>
+                  <div className="fw-bolder" style={{ color: '#28a745', fontSize: '1.2rem', letterSpacing: '-0.2px' }}>Open for Collaboration</div>
+                  <div className="text-dark fw-bold mt-1" style={{ fontSize: '1rem', letterSpacing: '-0.3px', wordBreak: 'keep-all' }}>산학협력 및 공동연구를 환영합니다. <br/>편하게 연락주세요.</div>
+                  <div className="text-dark mt-2 fw-bold d-flex align-items-center" style={{ fontSize: '0.9rem' }}>
+                     khseob0715@gmail.com <FeatherIcon icon="copy" style={{ width: 18, height: 18, marginLeft: '8px' }} />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        ))}
+        </div>
+
+        {/* Right Column: Project List */}
+        <div className="col-lg-9">
+              {/* Project Items */}
+              {sortedProjects.map((project, index) => (
+                <div className="mb-4" key={index}>
+                  <div className="card shadow-sm h-100 border-0 lift">
+                    <div className="card-body p-4">
+                      <div className="d-flex justify-content-between align-items-start">
+                        <div>
+                          {project.grantType && <div className="fw-bold mb-1" style={{ color: '#8b0029', fontSize: '0.9rem' }}>{project.grantType}</div>}
+                          <h4 className="fw-bolder text-dark mb-1">{project.title}</h4>
+                          {project.titleKr && <div className="text-muted small mb-3">{project.titleKr}</div>}
+                        </div>
+                        <span className={`badge ${project.status === '진행중' ? '' : 'bg-dark'} mt-1 text-nowrap ms-3 px-2 py-1`} style={{ fontSize: '0.85rem', backgroundColor: project.status === '진행중' ? '#8b0029' : '' }}>{project.status}</span>
+                      </div>
+                      <div className="small text-muted">
+                        <span><strong>책임:</strong> {project.pi}</span>
+                        {project.collaborators && <span className="mx-2">|</span>}
+                        {project.collaborators && <span><strong>협력:</strong> {project.collaborators}</span>}
+                        <span className="mx-2">|</span>
+                        <span><strong>기간:</strong> {project.duration}</span>
+                        <span className="mx-2">|</span>
+                        <span><strong>지원:</strong> {project.fundingSource} {project.amount ? `(${project.amount})` : ''}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+      {/* Custom Tooltip */}
+      {showTooltip && (
+        <div style={{
+          position: 'fixed',
+          top: tooltipPos.y - 40,
+          left: tooltipPos.x,
+          transform: 'translateX(-50%)',
+          backgroundColor: '#343a40',
+          color: '#fff',
+          padding: '8px 16px',
+          borderRadius: '6px',
+          fontSize: '1rem',
+          fontWeight: 'bold',
+          zIndex: 1050,
+          pointerEvents: 'none',
+          boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+          whiteSpace: 'nowrap',
+          width: 'fit-content'
+        }}>
+          이메일 주소를 복사했습니다.
+        </div>
+      )}
+
+      {/* Scroll to Top Button */}
+      {showTopBtn && (
+        <button
+          onClick={scrollToTop}
+          className="btn shadow-lg rounded-circle d-flex align-items-center justify-content-center lift"
+          style={{
+            position: 'fixed',
+            bottom: '30px',
+            right: '30px',
+            width: '50px',
+            height: '50px',
+            backgroundColor: '#8b0029',
+            color: 'white',
+            zIndex: 9999,
+            border: 'none',
+            padding: 0
+          }}
+          aria-label="Scroll to top"
+        >
+          <FeatherIcon icon="arrow-up" style={{ width: 24, height: 24, stroke: 'white' }} />
+        </button>
+      )}
       </div>
     </div>
   );

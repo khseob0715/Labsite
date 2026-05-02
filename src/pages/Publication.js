@@ -107,7 +107,7 @@ export const publicationsData = {
       link: 'https://dl.acm.org/doi/10.1145/3706598.3713515',
       image: process.env.PUBLIC_URL + '/assets/img/publications/chi2025.png',
       caption: 'Figure 1: Military Training(CQB) with Virtual Avatar in Mixed Reality Environment',
-      abstract:"Remote, vs. in situ, instruction may be regarded to decrease trainee engagement and concentration, potentially reducing training effectiveness. As such, local evaluative observers are often deployed to create the situated atmosphere. However, these observers can also have a negative effect on the trainees’ mental state and performance. This study investigates the impact of a local human observer’s presence on trainees’ mental state and task performance during military training conducted in a mixed reality (MR) environment, where a tele-presence avatar, controlled by the remote instructor, leads the training. An experiment was conducted comparing three conditions: remote training with (1) no observer, (2) a real observer, and (3) a virtual observer. The study found that although the observer, real or virtual, indeed negatively impacted the trainee’s mental state, the remote trainer avatar helped maintain the immersion/concentration, ensuring the trainees achieved the performance comparable to the no observer condition.",
+      abstract: "Remote, vs. in situ, instruction may be regarded to decrease trainee engagement and concentration, potentially reducing training effectiveness. As such, local evaluative observers are often deployed to create the situated atmosphere. However, these observers can also have a negative effect on the trainees’ mental state and performance. This study investigates the impact of a local human observer’s presence on trainees’ mental state and task performance during military training conducted in a mixed reality (MR) environment, where a tele-presence avatar, controlled by the remote instructor, leads the training. An experiment was conducted comparing three conditions: remote training with (1) no observer, (2) a real observer, and (3) a virtual observer. The study found that although the observer, real or virtual, indeed negatively impacted the trainee’s mental state, the remote trainer avatar helped maintain the immersion/concentration, ensuring the trainees achieved the performance comparable to the no observer condition.",
       citation:`@inproceedings{park2025impact,
   title={The Impact of Observer Presence on Trainees' Mental States and Performance in Remote Military Training with Virtual Humans in Mixed Reality Environment},
   author={Park, JunSeo and Yang, Yechan and Kim, Gerard Jounghyun and Kim, Hanseob},
@@ -167,14 +167,24 @@ export const publicationsData = {
       link: 'https://dl.acm.org/doi/10.1145/3655609'
     },
     {
+      id: 'false-stable-heart-rate',
       title: 'The Effects of False but Stable Heart Rate Feedback on Cybersickness and User Experience in Virtual Reality',
       authors: 'Dongyun Joo, Hanseob Kim*, Gerard Jounghyun Kim',
       tags: ['Conference', 'BK21'],
       journal: "CHI '24: Proceedings of the 2024 CHI Conference on Human Factors in Computing Systems",
       details: 'May 2024',
+      caption:'Figure 1: Cybersickness mitigation method using the False Heart Rate Feedback',
       doi: '10.1145/3613904.3642072',
+      image: process.env.PUBLIC_URL + '/assets/img/publications/chi2024-false.png',
+      abstract:'Virtual reality (VR) offers a compelling and immersive experience; however, cybersickness (or VR sickness) stands as a significant obstacle to its widespread adoption. When a user experiences cybersickness, one’s physical condition deteriorates with various symptoms, often accompanied by an increased and destabilized heart rate and even altered perception of one’s state. In this paper, we propose to provide “False but Stable Heart rate (FSH)” feedback through auditory and vibrotactile stimulation to reversely induce a stably perceived heart rate and, thereby, alleviate cybersickness while navigating a sickness-inducing VR content. The validation of the human experiment confirmed the intended effect in a statistically significant way. Furthermore, it was found that the lesser compatible FSH feedback had a more substantial sickness reduction effect but distracted the user with the reduced immersive experience. The compatible FSH feedback still showed moderate sickness reduction with the maintained sense of presence and immersion.',
       keywords: ['Cybersickness', 'Biofeedback', 'Heart Rate', 'User Experience', 'Virtual Reality'],
-      link: 'https://dl.acm.org/doi/10.1145/3613904.3642072'
+      link: 'https://dl.acm.org/doi/10.1145/3613904.3642072',
+      citation:`@inproceedings{joo2024effects,
+title={The effects of false but stable heart rate feedback on cybersickness and user experience in virtual reality},
+author={Joo, Dongyun and Kim, Hanseob and Kim, Gerard Jounghyun},
+booktitle={Proceedings of the 2024 CHI Conference on Human Factors in Computing Systems},
+pages={1--15},
+year={2024}}`
     },
     {
       id: 'engaged-affective-agents',
@@ -183,7 +193,16 @@ export const publicationsData = {
       tags: ['Conference', 'BK21'],
       journal: "CHI '24: Proceedings of the 2024 CHI Conference on Human Factors in Computing Systems",
       details: 'May 2024',
+      caption: 'Figure 1: Changes in user evaluations of the virtual human when it exhibits engaged and/or affective behavior during group discussions',
+      abstract: 'This study investigates how different virtual agent (VA) behaviors influence subjects’ perceptions and group decision-making. Participants carried out experimental group discussions with a VA exhibiting varying levels of engagement and affective behavior. Engagement refers to the VA’s focus on the group task, whereas affective behavior reflects the VA’s emotional state. The findings revealed that VA’s engagements effectively captured participants’ attention even in the group setting and enhanced group synergy, thereby facilitating more in-depth discussion and producing better consensus. On the other hand, VA’s affective behavior negatively affected the perceived social presence and trustworthiness. Consequently, in the context of group discussion, participants preferred the engaged and non-affective VA to the non-engaged and affective VA. The study provides valuable insights for improving the VA’s behavioral design as a team member for collaborative tasks',
+      image: process.env.PUBLIC_URL + '/assets/img/publications/chi2024.jpg',
       doi: '10.1145/3613904.3642917',
+      citation:`@inproceedings{kim2024engaged,
+title={Engaged and affective virtual agents: their impact on social presence, trustworthiness, and decision-making in the group discussion},
+author={Kim, Hanseob and Han, Bin and Kim, Jieun and Lubis, Muhammad Firdaus Syawaludin and Kim, Gerard Jounghyun and Hwang, Jae-In},
+booktitle={Proceedings of the 2024 CHI Conference on Human Factors in Computing Systems},
+pages={1--17},
+year={2024}}`,
       keywords: ['Virtual Human', 'Social Presence', 'Trustworthiness', 'Decision-Making', 'Affective Computing'],
       link: 'https://dl.acm.org/doi/10.1145/3613904.3642917',
       video: 'https://www.youtube.com/watch?v=aNfPIW1oad4'
@@ -769,7 +788,7 @@ function Publication() {
           {tabs.map(tab => {
             const pubCount = (publicationsData[tab.key] || []).length;
             return (
-              <li className="nav-item" key={tab.key}>
+              <li className="nav-item mb-2" key={tab.key}>
                 <a className={`nav-link mx-1 d-flex align-items-center ${activeTab === tab.key ? 'active' : ''}`} style={activeTab === tab.key ? { backgroundColor: '#8b0029', color: 'white', border: '1px solid #8b0029' } : { color: '#212529', border: '1px solid #ced4da', backgroundColor: 'transparent' }} href="#!" onClick={(e) => { e.preventDefault(); setActiveTab(tab.key); setFilterTag('All'); setSearchTerm(''); setSelectedKeywords([]); setSelectedYear('All'); }}>
                   {tab.name}
                   <span 
@@ -793,7 +812,7 @@ function Publication() {
                 <input type="text" className="form-control" placeholder="Search by title, author, journal..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
               </div>
               <select
-                className="form-select form-select-sm w-auto"
+                className="form-select form-select-sm w-auto "
                 value={selectedYear}
                 onChange={(e) => setSelectedYear(e.target.value)}
               >
@@ -852,7 +871,7 @@ function Publication() {
         href="https://scholar.google.co.kr/citations?hl=ko&user=Oi53T2UAAAAJ"
         target="_blank"
         rel="noopener noreferrer"
-        className="position-fixed bottom-0 end-0 m-4 p-3 shadow-lg rounded-pill d-flex align-items-center text-decoration-none lift"
+        className="position-fixed bottom-0 end-0 m-4 p-3 shadow-lg rounded-pill d-none d-md-flex align-items-center text-decoration-none lift"
         style={{ zIndex: 1050, backgroundColor: '#8b0029', color: 'white' }}
       >
         <div className="d-flex align-items-center justify-content-center bg-white rounded-circle me-3 shadow-sm" style={{ width: '45px', height: '45px', color: '#8b0029' }}>
