@@ -278,7 +278,7 @@ const Project = () => {
   );
 
   return (
-    <div className="container-fluid px-4 px-lg-5 mt-5 mb-5">
+    <div className="container-xl px-1 mt-5 mb-5">
       <style>
         {`
           #myProjectSwitch:checked {
