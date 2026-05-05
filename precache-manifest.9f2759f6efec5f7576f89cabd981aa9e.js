@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d6f935cef1bac6cb5eb2a0b0df1348f0",
+    "revision": "e33944807c6318b2ebccf56d99cede43",
     "url": "/HSKIM/index.html"
   },
   {
